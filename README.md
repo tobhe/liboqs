@@ -179,6 +179,11 @@ liboqs is licensed under the MIT License; see [LICENSE.txt](https://github.com/o
 - `src/kex_code_mcbits`: public domain
 - `src/rand_urandom_chacha20/external`: public domain
 
+<a href="https://scan.coverity.com/projects/open-quantum-safe-e74e519d-63ab-4cc3-8996-2961844911ce">
+  <img alt="Coverity Scan Build Status"
+       src="https://scan.coverity.com/projects/11746/badge.svg"/>
+</a>
+
 Team
 ----
 
