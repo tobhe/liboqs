@@ -14,7 +14,7 @@ matrix:
         - gcc-4.8
     coverity_scan:
       project:
-        name: open-quantum-safe/liboqs 
+        name: openquantumsafe 
         descriptiona: C library for quantum-resistant cryptographic algorithms
       notification_email: coverity-results@openquantumsafe.org
       build_command_prepend: "autoreconf -i;./configure;make clean"
