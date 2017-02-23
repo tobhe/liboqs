@@ -12,14 +12,14 @@ matrix:
         - ubuntu-toolchain-r-test
         packages:
         - gcc-4.8
-    coverity_scan:
-      project:
-        name: openquantumsafe 
-        descriptiona: C library for quantum-resistant cryptographic algorithms
-      notification_email: coverity-results@openquantumsafe.org
-      build_command_prepend: "autoreconf -i;./configure;make clean"
-      build_command: "make -j4"
-      branch_pattern: coverity_scan
+      coverity_scan:
+        project:
+          name: OQS 
+          descriptiona: C library for quantum-resistant cryptographic algorithms
+        notification_email: coverity-results@openquantumsafe.org
+        build_command_prepend: "autoreconf -i;./configure;make clean"
+        build_command: "make -j4"
+        branch_pattern: coverity_scan
     before_install:
     - sh .travis/install-clang-format-linux.sh
   - os: linux
