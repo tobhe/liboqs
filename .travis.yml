@@ -14,11 +14,11 @@ matrix:
         - gcc-4.8
       coverity_scan:
         project:
-          name: OQS 
+          name: OQS
           descriptiona: C library for quantum-resistant cryptographic algorithms
         notification_email: coverity-results@openquantumsafe.org
-        build_command_prepend: "autoreconf -i;./configure;make clean"
-        build_command: "make -j4"
+        build_command_prepend: autoreconf -i;./configure;make clean
+        build_command: make -j4
         branch_pattern: coverity_scan
     before_install:
     - sh .travis/install-clang-format-linux.sh
@@ -67,4 +67,4 @@ script:
 - CC=$CC_OQS ./.travis-tests.sh
 env:
   global:
-    secure: 0jPh8FMDGQeSsNRJ14gNmwbPSAaY8385MEiiKlSZZL8CwNDjhQDt0PMWjgz28qO1t5y8fD9d2OeTFmYr9v5VyuDRrgQ2ZByz+EnVBB0fBW+AL32qFu8/ivpjhXfgvPmJL7TMQzsOcyXLCh+kVecXXlsYGET8P1aMbzwaI7GEtkMJnN5lyl8MCpDybqMkFhZ7TMmm8uLTY45rRIIv5psp/Wxwy5nRnvbV41TJTJN1jjdOXInVP5/Ho6Gv+dZHvaI3Th7NiSBM4ukt38vZfKw+XKBbXdsKowI/Yn9u1Knf8snXdENdaucByISZGZ3yzBKjzRVWG9p8igwMJSxYWx62eXw84dWAL+uP2TecDBQ8n7W2YHrCfRni/tKGXNzG1Kgfxa031mD4vz7pccZorNgdf2lG01BXtriLFrM2Dx/jMZ4CCcreOeo8YPq/9p4/NZEEeC+DRLxZxdmIrAgh641OVLixqJqi/C0IcEJ2G6TfGBcWjU7z0HUfKCY0GkOV9HyogD47JwoK691cUn1a6QjoY8JSHx51euT+CL0mspMim2aeGvlb+xRqe4Poic46wYY9lJ3xJfpeKliKXcgJ0H+0RFt4r9hG0dhAjEpZWnHbSZ+zbKRV5w7leHYhhgaPTV4oJGI1jym1NvPcg7l0Jbivempt3GP+/yL6sJVRVsSksy0=
+    secure: Lv+FGmENyse72VZfD0yDQh1jHcYo6nVTyWsyJjUbGlByjUWc46shQSbr8uPazgUtRS1PpLnwujsULSOZOM/zO6YmdGHuwc92YgPm2W6sVvUl5qyvL2+o8TcrfItMUnOaoR06lXMTvHnotLo4WOuKJfVWcC1Tl2L5PHWUA93+sUi4CVUTnTff4UO1G1iljWuPm869UHq4tuV1pFZW+3kZ7IJp0CAMpeNGp8Nf17pddUzcValB1Q1FScTBcAbrtnnTGkEAaCSDB3FnbHp8lXAv5MiFDGK47hDDvac04MbdglMtmv35nwJPTgc5kKvkrcCy+8SsohReBF2uXf+as2YCpA41WS94/IhVpaWa7laXUXJvSx44e85VjBaYrRDtJPqAfycLK9kgWlliaF0vZFLANMAhrbS35ebZfTKP97AH4o/8fKxD2/hozwI92k4YdPMxzw2uprLxYt18rSyA1cNuMmVcEPGCd5GlZ9znsmyPkXboIHonhfFwZ1jUJ+rM0I5JTT+0hhCqeB1DHGn7fMhiadpLGERkhwzOijIwPHdbQfW6/DL6xDUV7M5DBBGs4FSraU2mNVMjmbp2GczJRkUSLtAyqM7ykokicsEjUUI8N2PPcLCzjd7g23ykuFxynZqUv3UtUF59SZ70RnBY96uQtn6C1369ygEQBVw5YObQJQ4=
