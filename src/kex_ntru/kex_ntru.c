@@ -1,4 +1,4 @@
-#ifdef ENABLE_NTRU
+#ifndef DISABLE_NTRU_ON_WINDOWS_BY_DEFAULT
 
 #if defined(WINDOWS)
 #define UNUSED

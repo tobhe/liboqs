@@ -5,13 +5,19 @@ matrix:
   include:
   - os: linux
     compiler: gcc
-    env: CC_OQS=gcc-4.8
+    env:
+    - ENABLE_SIDH_IQC_REF=1
+    - ENABLE_KEX_LWE_FRODO=0
+    - ENABLE_KEX_MLWE_KYBER=0
+    - ENABLE_KEX_SIDH_CLN16=0
+    - USE_PICNIC=1
+    - USE_OPENSSL=1
     addons:
       apt:
         sources:
         - ubuntu-toolchain-r-test
         packages:
-        - gcc-4.8
+          - libm4ri-dev
       coverity_scan:
         project:
           name: OQS
@@ -46,7 +52,9 @@ matrix:
     - sh .travis/install-clang-format-linux.sh
   - os: linux
     compiler: gcc
-    env: CC_OQS=gcc-6 USE_OPENSSL=1 ENABLE_NTRU=1
+    env:
+    - CC_OQS=gcc-6
+    - USE_OPENSSL=1
     addons:
       apt:
         sources:
@@ -56,15 +64,24 @@ matrix:
         - libssl-dev
     before_install:
     - sh .travis/install-clang-format-linux.sh
-    - bash download-and-build-ntru.sh
   - os: osx
     compiler: clang
-    env: CC_OQS=clang AES_NI=0 USE_OPENSSL=1 ENABLE_CODE_MCBITS=1 ENABLE_NTRU=1
+    env:
+    - CC_OQS=clang
+    - AES_NI=0
+    - USE_OPENSSL=1
+    - OPENSSL_DIR=/usr/local/opt/openssl # openssl is a keg-only package
+    - ENABLE_CODE_MCBITS=1
+    - ENABLE_SIDH_IQC_REF=1
+    - USE_PICNIC=1
+    - M4RI_DIR=/usr/local/
     before_install:
-    - brew install clang-format openssl libsodium
-    - bash download-and-build-ntru.sh
+    - brew install libsodium
+    - brew install https://raw.githubusercontent.com/Homebrew/homebrew-core/0c4314c499576b28e4c082b591228a8f940954c0/Formula/clang-format.rb
+    - brew install homebrew/science/m4ri
 script:
 - CC=$CC_OQS ./.travis-tests.sh
 env:
   global:
     secure: Lv+FGmENyse72VZfD0yDQh1jHcYo6nVTyWsyJjUbGlByjUWc46shQSbr8uPazgUtRS1PpLnwujsULSOZOM/zO6YmdGHuwc92YgPm2W6sVvUl5qyvL2+o8TcrfItMUnOaoR06lXMTvHnotLo4WOuKJfVWcC1Tl2L5PHWUA93+sUi4CVUTnTff4UO1G1iljWuPm869UHq4tuV1pFZW+3kZ7IJp0CAMpeNGp8Nf17pddUzcValB1Q1FScTBcAbrtnnTGkEAaCSDB3FnbHp8lXAv5MiFDGK47hDDvac04MbdglMtmv35nwJPTgc5kKvkrcCy+8SsohReBF2uXf+as2YCpA41WS94/IhVpaWa7laXUXJvSx44e85VjBaYrRDtJPqAfycLK9kgWlliaF0vZFLANMAhrbS35ebZfTKP97AH4o/8fKxD2/hozwI92k4YdPMxzw2uprLxYt18rSyA1cNuMmVcEPGCd5GlZ9znsmyPkXboIHonhfFwZ1jUJ+rM0I5JTT+0hhCqeB1DHGn7fMhiadpLGERkhwzOijIwPHdbQfW6/DL6xDUV7M5DBBGs4FSraU2mNVMjmbp2GczJRkUSLtAyqM7ykokicsEjUUI8N2PPcLCzjd7g23ykuFxynZqUv3UtUF59SZ70RnBY96uQtn6C1369ygEQBVw5YObQJQ4=
+
