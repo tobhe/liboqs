@@ -94,3 +94,7 @@ stamp-h1
 #params
 sample_params
 data/
+
+#coverity
+analysis-results.tgz
+cov-int/
