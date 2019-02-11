@@ -1,13 +1,7 @@
-#if defined(WINDOWS)
-#define UNUSED
-// __attribute__ not supported in VS, is there something else I should define?
-#else
-#define UNUSED __attribute__((unused))
-#endif
-
 #include <assert.h>
 #include <stdint.h>
 #include <stdio.h>
+#include <oqs/common.h>
 
 #ifndef AES_ENABLE_NI
 #include <assert.h>
@@ -67,7 +61,7 @@ void oqs_aes128_load_schedule_ni(const uint8_t *key, void **_schedule) {
 
 void oqs_aes128_free_schedule_ni(void *schedule) {
 	if (schedule != NULL) {
-		free(schedule);
+		OQS_MEM_secure_free(schedule, 320);
 	}
 }
 

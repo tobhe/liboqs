@@ -1,309 +1,221 @@
-[![Build Status](https://travis-ci.org/open-quantum-safe/liboqs.svg?branch=master)](https://travis-ci.org/open-quantum-safe/liboqs)
-<a href="https://scan.coverity.com/projects/oqs">
-  <img alt="Coverity Scan Build Status"
-       src="https://scan.coverity.com/projects/11860/badge.svg"/>
-</a>
-[![Build status](https://ci.appveyor.com/api/projects/status/9d2ts78x88r8wnii/branch/master?svg=true)](https://ci.appveyor.com/project/dstebila/liboqs/branch/master)
+liboqs - master branch
+======================
 
-liboqs
-======
-
-liboqs is a C library for quantum-resistant cryptographic algorithms.
+**liboqs** is a C library for quantum-resistant cryptographic algorithms.  This branch of liboqs focuses on selected key encapsulations and signature algorithms.
 
 Overview
 --------
 
 The **Open Quantum Safe (OQS) project** has the goal of developing and prototyping quantum-resistant cryptography.
 
-**liboqs** is an open source C library for quantum-resistant cryptographic algorithms.  liboqs initially focuses on key exchange algorithms.  liboqs provides a common API suitable for post-quantum key exchange algorithms, and will collect together various implementations.  liboqs will also include a test harness and benchmarking routines to compare performance of post-quantum implementations.
+**liboqs** is an open source C library for quantum-resistant cryptographic algorithms.  liboqs provides:
 
-OQS will also include integrations into application-level protocols to provide easy prototyping of quantum-resistant cryptography.  Our first integration is in OpenSSL:
+- a common API for post-quantum key encapsulation mechanisms and digital signature schemes
+- a collection of open source implementations of post-quantum cryptography algorithms
+- a test harness and benchmarking routines
 
-- **open-quantum-safe/openssl** is an integration of liboqs into OpenSSL 1.0.2.  The goal of this integration is to provide easy prototyping of quantum-resistant cryptography.  The integration should not be considered "production quality".  See more about this integration in its GitHub repository [open-quantum-safe/openssl/](https://github.com/open-quantum-safe/openssl/).
+The OQS project also provides prototype integrations into application-level protocols to enable testing of quantum-resistant cryptography.
 
 More information on OQS can be found on our website: [https://openquantumsafe.org/](https://openquantumsafe.org/).
 
-Contents
---------
+master branch
+-------------
 
-liboqs currently contains:
+This branch of liboqs aims to selectively incorporate allegedly quantum-resistant key encapsulation mechanisms and signature schemes, for the purposes of integration into a common API for liboqs-reliant applications.
 
-- `kex_rlwe_bcns15`: key exchange from the ring learning with errors problem (Bos, Costello, Naehrig, Stebila, *IEEE Symposium on Security & Privacy 2015*, [https://eprint.iacr.org/2014/599](https://eprint.iacr.org/2014/599))
-- `kex_rlwe_newhope`: "NewHope": key exchange from the ring learning with errors problem (Alkim, Ducas, Pöppelmann, Schwabe, *USENIX Security 2016*, [https://eprint.iacr.org/2015/1092](https://eprint.iacr.org/2015/1092)) (using the reference C implementation of NewHope from [https://github.com/tpoeppelmann/newhope](https://github.com/tpoeppelmann/newhope))
-- `kex_rlwe_msrln16`: Microsoft Research implementation of Peikert's ring-LWE key exchange (Longa, Naehrig, *CANS 2016*, [https://eprint.iacr.org/2016/504](https://eprint.iacr.org/2016/504)) (based on the implementation of Alkim, Ducas, Pöppelmann, and Schwabe, with improvements from Longa and Naehrig, see [https://www.microsoft.com/en-us/research/project/lattice-cryptography-library/](https://www.microsoft.com/en-us/research/project/lattice-cryptography-library/))
-- `kex_lwe_frodo`: "Frodo": key exchange from the learning with errors problem (Bos, Costello, Ducas, Mironov, Naehrig, Nikolaenko, Raghunathan, Stebila, *ACM Conference on Computer and Communications Security 2016*, [https://eprint.iacr.org/2016/659](https://eprint.iacr.org/2016/659))
-- `kex_sidh_cln16`: key exchange from the supersingular isogeny Diffie-Hellman problem (Costello, Naehrig, Longa, *CRYPTO 2016*, [https://eprint.iacr.org/2016/413](https://eprint.iacr.org/2016/413)), using the implementation of Microsoft Research [https://www.microsoft.com/en-us/research/project/sidh-library/](https://www.microsoft.com/en-us/research/project/sidh-library/)
-- `kex_sidh_iqc_ref`: key exchange from the supersingular isogeny Diffie-Hellman problem (De Feo, Jao, Plût, *J. Math. Cryptol.* 8(3):209, 2014, [https://eprint.iacr.org/2011/506](https://eprint.iacr.org/2011/506)), using a reference implementation by Javad Doliskani
-- `kex_code_mcbits`: "McBits": key exchange from the error correcting codes, specifically Niederreiter's form of McEliece public key encryption using hidden Goppa codes (Bernstein, Chou, Schwabe, *CHES 2013*, [https://eprint.iacr.org/2015/610](https://eprint.iacr.org/2015/610)), using the implementation of McBits from [https://www.win.tue.nl/~tchou/mcbits/](https://www.win.tue.nl/~tchou/mcbits/))
-- `kex_ntru`: NTRU: key transport using NTRU public key encryption (Hoffstein, Pipher, Silverman, *ANTS 1998*) with the EES743EP1 parameter set, wrapper around the implementation from the NTRU Open Source project [https://github.com/NTRUOpenSourceProject/NTRUEncrypt](https://github.com/NTRUOpenSourceProject/NTRUEncrypt))
-- `kex_mlwe_kyber`: Kyber: a CCA-secure module-lattice-based key exchange mechanism (Bos, Ducas, Kiltz, Lepoint, Lyubashevsky, Schwabe, Shanck, Stehlé, *Real World Crypto 2017*, [https://eprint.iacr.org/2017/634](https://eprint.iacr.org/2017/634)), using the reference C implementation of Kyber from [pq-crystals/kyber](https://github.com/pq-crystals/kyber)
-- `sig_picnic`: signature based on zero-knowledge proof as specified in Post-Quantum Zero-Knowledge and Signatures from Symmetric-Key Primitives (Melissa Chase and David Derler and Steven Goldfeder and Claudio Orlandi and Sebastian Ramacher and Christian Rechberger and Daniel Slamanig and Greg Zaverucha, [https://eprint.iacr.org/2017/279.pdf](https://eprint.iacr.org/2017/279.pdf))
+Implementations on this branch must meet certain acceptance criteria as indicated below.
 
-Detailed information about each algorithm and implementations can be found in the [docs/Algorithm data sheets](https://github.com/open-quantum-safe/liboqs/tree/master/docs/Algorithm%20data%20sheets) directory.
+For a list of algorithms included in master branch, see the datasheets in [docs/algorithms](https://github.com/open-quantum-safe/liboqs/tree/master/docs/algorithms).
 
-Building and Running on Linux and macOS
----------------------------------------
+Limitations and security
+------------------------
 
-Builds have been tested on Mac OS X 10.11.6, macOS 10.12.5, Ubuntu 16.04.1.
+liboqs is designed for prototyping and evaluating quantum-resistant cryptography.  Security of proposed quantum-resistant algorithms may rapidly change as research advances, and may ultimately be completely insecure against either classical or quantum computers.
+
+We believe that the NIST Post-Quantum Cryptography standardization project is currently the best avenue to identifying potentially quantum-resistant algorithms.  liboqs does not intend to "pick winners", and we strongly recommend that applications and protocols rely on the outcomes of the NIST standardization project when deploying post-quantum cryptography.
+
+We acknowledge that some parties may want to begin deploying post-quantum cryptography prior to the conclusion of the NIST standardization project.  We strongly recommend that any attempts to do make use of so-called **hybrid cryptography**, in which post-quantum public-key algorithms are used alongside traditional public key algorithms (like RSA or elliptic curves) so that the solution is at least no less secure than existing traditional cryptography.
+
+liboqs is provided "as is", without warranty of any kind.  See [LICENSE.txt](https://github.com/open-quantum-safe/liboqs/blob/master/LICENSE.txt) for the full disclaimer.
+
+Acceptance criteria for master branch
+-------------------------------------
+
+New submissions to master branch must meet the following acceptance criteria:
+
+- **Algorithmic requirements:**
+	- The algorithm must be submitted to the NIST Post-Quantum Cryptography project, or posted as update to an existing algorithm, and must be present in the current round
+	- Algorithms whose security is considered effectively broken are not eligible for addition; see the Lifecycle section below for conditions on their removal.
+	- KEMs can be IND-CPA or IND-CCA-secure, at any NIST security level.
+	- Signature schemes can be EUF-CMA-secure, at any NIST security level.
+- **Targets**:
+	- **Operating systems:** The code must build on Linux, macOS, and Windows.
+	- **Architecture:** The code must build at least on x86 and x64.  Build targets are available for various processor-specific features.
+- **Source code requirements:**
+	- **License:** Source code licensed under the MIT License, the BSD license, or in the public domain can be directly incorporated into the repository.  GPL code will not be included in the repository.
+	- **Code quality:** The source code must meet the following quality checks, some of which are enforced by our continuous integration system:
+		- Public API functions must be documented with appropriate Doxygen comments.
+		- Source code must be formatted in accordance with our formatting requirements (`make prettyprint`).
+		- All secrets in memory must be zero'ed out before being deallocated/released using our `OQS_MEM_*` functions.
+		- Exported symbols must be namespaced.
+		- We will periodically run static analysis other analysis tools to identify additional potential flaws.
+	- **Common function usage:** The source code should make use of liboqs' random number generator, AES implementation, and SHA-3 implementation, rather than its own implementation.
+- **Maintenance**: We hope the contributor will intend to help update the implementation in liboqs as the algorithm evolves or as we make enhancements to the library.
+
+Algorithms may be removed from liboqs master branch if they no longer meet the acceptance criteria, see the lifecycle section below.
+
+Contributing
+------------
+
+Contributions that meet the acceptance criteria above are gratefully welcomed.  See <a href="https://github.com/open-quantum-safe/liboqs/blob/master/CONTRIBUTING.md">CONTRIBUTING.md</a> for details on contributing an implementation.
+
+Lifecycle for master branch
+---------------------------
+
+**Release cycle:** We aim to make releases of liboqs master branch every 2 to 3 months.  Plans for each individual release can be found on our [Github projects board](https://github.com/open-quantum-safe/liboqs/projects/).  
+
+**Versioning:** For approximately the period 2018-2019, we plan to label our releases with a variant of semantic versioning, using the notation *0.Y.Z*.  Semantic versioning allows that anything may change between *0.whatever* versions.  We intend to use *X.Y.Z* labelling as follows, for *X=0*.
+
+- *X=0* will be used for approximately the period 2018-2019.  Later in 2019, we will revisit whether we are ready to make a *1.0.0* release, and specify a new verisoning method at that time.
+- *Y* will be incremented when backwards incompatible changes are introduced that either change the public API or change the input/output behaviour of a cryptographic algorithm.  See explanation below.
+- *Z* will be incremented when backwards compatible bug fixes are introduced.  
+
+**Algorithm deprecation:** If an algorithm in master branch is found to be insecure or does not advance to the next round of the NIST competition, but is included in version $0.Y.Z$, it will be marked as deprecated using a compile time warning in version $0.(Y+1).Z'$ and removed in version $0.(Y+2).Z''$.
+
+**Algorithm compatibility:** Unlike existing standardization cryptographic algorithms (SHA-2, SHA-3, PKCS\#1v1.5, nistp256, ...), post-quantum algorithms are under active development, and the mathematical algorithm of a cryptographic scheme may change: a particular name (e.g., "FrodoKEM-AES-640") may refer to different mathematical algorithms over time.  liboqs may update implementations as algorithms evolve.  During the $0.Y.Z$ phase of liboqs, versions $0.Y.Z$ and version $0.(Y+1).Z'$ may not be interoperable.  liboqs-reliant applications can check the `alg_version` member of the `OQS_KEM` data structure for each algorithm to obtain an identifier of the algorithm version used in a particular implementation; implementations returning the same `alg_version` for an algorithm will be interoperable.
+
+**API stability:** The public API of liboqs master branch is currently considered to be the functions and macros in `oqs/common.h`, `oqs/oqsconfig.h`, `oqs/kem.h`, `oqs/rand.h`, `oqs/sig.h`, and includes all functions marked with `OQS_API`.  During the $0.Y.Z$ phase of liboqs, incompatible changes to the public API will lead to incrementing $Y$.
+
+Building and running liboqs master branch
+-----------------------------------------
+
+Builds are tested using the Travis continuous integration system on macOS 10.13.3 (clang 9.1.0) and Ubuntu 14.04.5 (gcc.4.8, gcc-4.9, gcc-5, gcc-6).  It has also been tested manually on macOS 10.14 (clang 10.0.0), Ubuntu 14.04 (gcc-5), Ubuntu 16.04 (gcc-5), and Ubuntu 18.04.1 (gcc-7).
+
+- [Build status using Travis continuous integration system:](https://travis-ci.org/open-quantum-safe/liboqs/branches) ![Build status image](https://travis-ci.org/open-quantum-safe/liboqs.svg?branch=master) <a href="https://scan.coverity.com/projects/oqs"><img alt="Coverity Scan Build Status" src="https://scan.coverity.com/projects/11860/badge.svg"/></a>
+
+### Install dependencies for Linux Ubuntu
+
+You need to install the following packages:
+
+	sudo apt install autoconf automake libtool gcc libssl-dev unzip xsltproc
 
 ### Install dependencies for macOS
 
-You need to install `autoconf`, `automake` and `libtool`:
+You need to install the following packages using brew (or a package manager of your choice):
 
-	brew install autoconf automake libtool
-
-### Install dependencies for Ubuntu
-
-You need to install autoconf, automake and libtool:
-
-	sudo apt install autoconf automake libtool
+	brew install autoconf automake libtool openssl wget
 
 ### Building
 
-To build, first clone or download the source from GitHub, then simply type:
+To build, first clone or download the source from GitHub:
+
+	git clone -b master https://github.com/open-quantum-safe/liboqs.git
+	cd liboqs
+
+Run the build system:
 
 	autoreconf -i
 	./configure
 	make clean
-	make
+	make -j
 
-This will generate:
+(If on macOS you encounter an error like `Can't exec "libtoolize": No such file or directory at ...`, try running with `LIBTOOLIZE=glibtoolize autoreconf -i`.)
 
-- `liboqs.a`: A static library with implementations for the algorithms listed in "Contents" above.
-- `test_rand`: A simple test harness for the random number generator.  This will test the distance of PRNG output from uniform using statistical distance.
-- `test_aes`: A simple test harness for AES.  This will test the correctness of the C implementation (and of the AES-NI implementation, if not disabled) of AES, and will compare the speed of these implementations against OpenSSL's AES implementation.
-- `test_kex`: A simple test harness for the default key exchange algorithm.  This will output key exchange messages; indicate whether the parties agree on the session key or not over a large number of trials; and measure the distance of the sessions keys from uniform using statistical distance.
-- `test_sig`: A simple test harness for the signature algorithms.
+You can enable/disable various algorithms at compile-time, tell liboqs to use OpenSSL for certain crypto algorithms, and more; see `./configure --help`.  (In particular, on macOS, you might want to point liboqs to brew's version of OpenSSL, via the command: `./configure --enable-openssl --with-openssl-dir=/usr/local/opt/openssl`.)
 
-### Running
+### Build results
 
-To run the tests, simply type:
+The main build result is `liboqs.a`, a static library.  (This may be placed in the `.libs` directory.)
 
-	make test
+There are also a variety of test programs built under the `tests` directory:
 
-To run benchmarks, run
-
-	./test_kex --bench
-
-To run benchmark only on some ciphers, run
-
-	./test_kex --help
-
-to list the available ciphers and then run e.g.
-
-	./test_kex --bench rlwe_bcns15 rlwe_newhope
-
-
-#### Memory benchmarks
-
-To run one or more ciphers only once use `--mem-bench`, which is suitable for memory usage profiling:
-
-	./test_kex --mem-bench ntru
-
-You may also get instant memory usage results of an algorithm (e.g. ntru) by running [valgrind's massif tool](http://valgrind.org/docs/manual/ms-manual.html) by running
-
-	./kex_bench_memory.sh ntru
-
-
-### Additional build options
-
-#### Building with OpenSSL algorithms enabled:
-
-OpenSSL can be used for some symmetric crypto algorithms, which may result in better performance.
-
-To build with OpenSSL enabled:
-
-	./configure --enable-openssl
-	make clean
-	make
-
-You may need to specify the path to your OpenSSL directory:
-
-	./configure --enable-openssl --with-openssl-dir=/path/to/openssl/directory
-	make clean
-	make
-
-### Building with `kex_sidh_iqc_ref` enabled
-
-The `kex_sidh_iqc_ref ` key exchange method is not enabled by default since it requires an external library (libgmp).
-
-To install the library on macOS:
-
-	brew install gmp
-
-To build with `kex_sidh_iqc_ref ` enabled:
-
-	./configure --enable-sidhiqc
-	make clean
-	make
-
-You may need to specify the path to your libgmp directory:
-
-	./configure --enable-sidhiqc --with-gmp-dir=/path/to/gmp/directory
-	make clean
-	make
-
-### Building with `kex_code_mcbits` enabled
-
-The `kex_code_mcbits` key exchange method is not enabled by default since it requires an external library (libsodium).
-
-To install the library on macOS:
-
-	brew install libsodium
-
-To install the library on Ubuntu:
-
-	sudo apt install libsodium-dev
-
-To build with `kex_code_mcbits ` enabled:
-
-	./configure --enable-mcbits
-	make clean
-	make
-
-### Building with the following KEX algorithms disabled
-
-  ./configure --disable-kex-ntru --disable-kex-lwe-frodo --disable-kex-mlwe-kyber --disable-kex-rlwe-msrln16  --disable-kex-rlwe-newhope --disable-kex-sidh-cln16
-  make clean
-  make
-
-### Building with `sig_picnic` enabled
-
-The `sig_picnic` signature algorithm is not enabled by default since it requires:
-
-- external libraries (`openssl` and `m4ri`);
-- to download and setup Picnic;
-- a parameters generation preprocessing step.
-
-To install the libraries on macOS:
-
-	brew install openssl homebrew/science/m4ri
-
-To install the libraries on Ubuntu:
-
-	sudo apt install libssl-dev libm4ri-dev
-
-To download the Picnic source code:
-
-	./download-and-setup-picnic.sh
-
-To build with `sig_picnic` enabled:
-
-	./configure --enable-picnic --enable-openssl [--with-openssl-dir=<..> --with-m4r-dir=<..>]
-	make clean
-	make
-	make test   (this generates data needed by the Picnic library)
+- `test_kem`: Simple test harness for all enabled key encapsulation mechanisms
+- `test_sig`: Simple test harness for all enabled key signature schemes
+- `kat_kem`: Program that generates known answer test (KAT) values for all enabled key encapsulation mechanisms using the same mechanism as the NIST submission requirements, for checking against submitted KAT values using `scripts/check_cats.sh`
+- `speed_kem`: Benchmarking program for key encapsulation mechanisms; see `./speed_kem --help` for usage instructions
+- `speed_sig`: Benchmarking program for signature mechanisms; see `./speed_sig --help` for usage instructions
+- `example_kem`: Minimal runnable example showing the usage of the KEM API
+- `example_sig`: Minimal runnable example showing the usage of the signature API
+- `test_aes`, `test_sha3`: Simple test harnesses for crypto sub-components
 
 Building and running on Windows
 -------------------------------
 
-Windows binaries can be generated using the Visual Studio solution in the VisualStudio folder.  Builds have been tested on Windows 10.
+Windows binaries can be generated using the Visual Studio solution in the `VisualStudio` folder.
 
-McBits is disabled by default in the Visual Studio build; follow these steps to enable it:
+Builds are tested using the Appveyor continuous integration system on Windows Server 2016 (Visual Studio 2017).  Our developers also test builds periodically on Windows 10.
 
-- Obtain the [libsodium library](https://libsodium.org); compile the static library from the Visual Studio projects.
-- Add `ENABLE_CODE_MCBITS` and `SODIUM_STATIC` to the preprocessor definitions of the `oqs` and `test_kex` projects.
-- Add the sodium "src/include" location to the "Additional Include Directories" in the oqs project C properties.
-- Add the libsodium library to the "Additional Dependencies" in the `test_kex` project Linker properties.
+- [Build status using Appveyor continuous integration system:](https://ci.appveyor.com/project/dstebila/liboqs) ![Build status image](https://ci.appveyor.com/api/projects/status/9d2ts78x88r8wnii/branch/master?svg=true)
 
-Picnic is disabled by default in the Visual Studio build; follow these steps to enable it:
-- Download the [Picnic library](https://github.com/Microsoft/Picnic/archive/master.zip), unzip it into src\sig\sig_picnic\external.
-- Open src\sig_picnic\external\Picnic-master\VisualStudio\picnic.sln, build the library for the desired target.
-- Add "ENABLE_PICNIC" the oqs and test_picnic projects' C/C++ Preprocessor Definitions.
-- Add "libeay32.lib" and "picnic.lib" to the test_picnic project's Linker Input.
-Picnic requires pre-generated parameters to run. They cannot be generated on Windows due to some lib dependencies. They must therefore
-be generated externally and imported on the Windows machine; see the Picnic library documentation. Once this is done, before running
-the OQS unit tests or other programs using OQS with Picnic enabled, follow this step:
-- Add an environment variable PICNIC_PARAMS_PATH containing the path of the pregenerated parameters.
+The supported schemes are defined in the projects' `winconfig.h` file.
 
-Building for Android
---------------------
+Building on other platforms
+---------------------------
 
-Install Android NDK
+We do not yet fully support building liboqs on ARM platforms, but are working towards maintaining ARM support in a future release.
 
-Create a standalone toolchain for the platform that you wish to cross compile for (e.g. NDK_BUNDLE="~/Android/Sdk/ndk-bundle" ARCH=arm64 INSTALL_DIR="/tmp/ndk-toolchain"):
+At present, we have successfully built liboqs on a Raspberry Pi 3B (armv7l) with the following configure command:
 
-	$NDK_BUNDLE/build/tools/make_standalone_toolchain.py --arch $ARCH --install-dir $INSTALL_DIR
-
-Configure and build for Android after running `autoreconf -i` (e.g. HOST=aarch64-linux-android TOOLCHAIN_DIR=$INSTALL_DIR):
-
-	./configure-android --host=$HOST --toolchain=$TOOLCHAIN_DIR
-	make
-
-Run it from your Android device:
-
-	adb push test_kex  /data/local/tmp/
-	adb shell "/data/local/tmp/test_kex"
-
-Tested on SM-930F
+    ./configure --disable-aes-ni --disable-sig-qtesla --disable-kem-frodokem
 
 Documentation
 -------------
 
-The directory `docs/Algorithm data sheets` contains information about some of the algorithms supported by liboqs.
+The directory `docs/algorithms` contains information about each algorithm available in this branch of liboqs.
 
-### Doxygen documentation
-
-Some source files contain inline Doxygen-formatted comments which can be used to generate additional documentation.
-
-On macOS, you may need to install several dependencies first:
-
-	brew install doxygen graphviz
-
-The documentation can be generated by running:
+If you have Doxygen installed (Linux: `sudo apt install doxygen graphviz`; macOS: `brew install doxygen graphviz`), you can build HTML documentation of the liboqs master branch API:
 
 	make docs
 
-This will generate the `docs/doxygen/html` directory.  Check `./configure --help` for generating other formats.
+Then open `docs/doxygen/html/index.html` in your web browser.
 
-Contributing and using
-----------------------
+### liboqs default algorithms
 
-We hope OQS will provide a framework for many post-quantum implementations.
-
-In the immediate term, if you have feedback on our API ([kex.h](https://github.com/open-quantum-safe/liboqs/blob/master/src/kex/kex.h), [sig.h](https://github.com/open-quantum-safe/liboqs/blob/master/src/sig/sig.h) or [rand.h](https://github.com/open-quantum-safe/liboqs/blob/master/src/rand/rand.h)), please contact us so we can ensure our API covers a wide range of implementation needs.
-
-If you have or are writing an implementation of a post-quantum key exchange algorithm, we hope you will consider making an implementation that meets our API so that others may use it and would be happy to discuss including it directly in liboqs.  Please take a look at our [coding conventions](https://github.com/open-quantum-safe/liboqs/wiki/Coding-conventions).
-
-If you would like to use liboqs in an application-level protocol, please get in touch and we can provide some guidance on options for using liboqs.
-
-We are also interested in assistance from code reviewers.
-
-Please contact Douglas Stebila <[stebilad@mcmaster.ca](mailto:stebilad@mcmaster.ca)>.
+The key encapsulation algorithm type `OQS_KEM_alg_default` and signature algorithm type `OQS_SIG_alg_default` are intended for testing purposes and can be changed at compile-time. Care should be exercised if these types are used for other purposes.
 
 License
 -------
 
-liboqs is licensed under the MIT License; see [LICENSE.txt](https://github.com/open-quantum-safe/liboqs/blob/master/LICENSE.txt) for details.  liboqs includes some third party libraries or modules that are licensed differently; the corresponding subfolder contains the license that applies in that case.  In particular:
+liboqs is licensed under the MIT License; see [LICENSE.txt](https://github.com/open-quantum-safe/liboqs/blob/master/LICENSE.txt) for details.
+
+liboqs includes some third party libraries or modules that are licensed differently; the corresponding subfolder contains the license that applies in that case.  In particular:
 
 - `src/crypto/aes/aes_c.c`: public domain
-- `src/crypto/rand_urandom_chacha20/external`: public domain
-- `src/kex_code_mcbits`: public domain
-- `src/kex_mlwe_kyber`: public domain
-- `src/kex_rlwe_bcns15`: public domain ([Unlicense](http://unlicense.org))
-- `src/kex_rlwe_msrln16`: MIT License
-- `src/kex_rlwe_msrln16/external`: public domain ([CC0](http://creativecommons.org/publicdomain/zero/1.0/))
-- `src/kex_rlwe_newhope`: public domain
-- `src/kex_sidh_cln16`: MIT License
-- `src/kex_sidh_iqc_ref`: MIT License
-- `src/sig_picnic`: MIT License
+- `src/crypto/sha3`: public domain
+- `src/kem/newhopenist/optimized`: public domain
+- `src/sig/qtesla/external`: public domain
 
 
 Team
 ----
 
-The Open Quantum Safe project is lead by [Michele Mosca](http://faculty.iqc.uwaterloo.ca/mmosca/) (University of Waterloo) and [Douglas Stebila](https://www.douglas.stebila.ca/research/) (McMaster University).
+The Open Quantum Safe project is led by [Douglas Stebila](https://www.douglas.stebila.ca/research/) and [Michele Mosca](http://faculty.iqc.uwaterloo.ca/mmosca/) at the University of Waterloo.
 
 ### Contributors
 
+Contributors to this master branch of liboqs include:
+
+- Nicholas Allen (Amazon Web Services)
+- Maxime Anvari
+- Eric Crockett (Amazon Web Services)
+- Nir Drucker (Amazon Web Services)
+- Ben Davies (University of Waterloo)
 - Javad Doliskani (University of Waterloo)
-- Vlad Gheorghiu (evolutionQ / University of Waterloo)
+- Vlad Gheorghiu (evolutionQ)
+- Shay Gueron (Amazon Web Services)
 - Tancrède Lepoint (SRI International)
 - Shravan Mishra (University of Waterloo)
 - Christian Paquin (Microsoft Research)
 - Alex Parent (University of Waterloo)
+- Peter Schwabe (Radboud University Nijmegen)
+- Douglas Stebila (University of Waterloo)
+- [John Underhill](https://github.com/Steppenwolfe65/CEX)
 - Sebastian Verschoor (University of Waterloo)
 
 ### Support
 
-Development of Open Quantum Safe has been supported in part by the Tutte Institute for Mathematics and Computing.  Research projects which developed specific components of Open Quantum Safe have been supported by various research grants; see the source papers for funding acknowledgments.
+Financial support for the development of Open Quantum Safe has been provided by Amazon Web Services and the Tutte Institute for Mathematics and Computing.  
+
+We'd like to make a special acknowledgement to the companies who have dedicated programmer time to contribute source code to OQS, including Amazon Web Services, evolutionQ, and Microsoft Research.  
+
+Research projects which developed specific components of OQS have been supported by various research grants, including funding from the Natural Sciences and Engineering Research Council of Canada (NSERC); see the source papers for funding acknowledgments.

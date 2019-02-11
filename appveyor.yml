@@ -1,9 +1,31 @@
 version: 1.0.{build}
+
 image: Visual Studio 2017
+
 build:
   verbosity: minimal
+
+branches:
+  except:
+    - /.*nist.*/
+    - /master-new-.*/
+
+configuration:
+  - Release
+  - ReleaseDLL
+
 test_script:
 - cmd: >-
-    C:\projects\liboqs\VisualStudio\x64\Debug\test_rand.exe
+    %APPVEYOR_BUILD_FOLDER%\VisualStudio\x64\%CONFIGURATION%\test_kem.exe
 
-    C:\projects\liboqs\VisualStudio\x64\Debug\test_kex.exe
+    %APPVEYOR_BUILD_FOLDER%\VisualStudio\x64\%CONFIGURATION%\test_sig.exe
+
+    %APPVEYOR_BUILD_FOLDER%\VisualStudio\x64\%CONFIGURATION%\example_kem.exe
+
+    %APPVEYOR_BUILD_FOLDER%\VisualStudio\x64\%CONFIGURATION%\kat_kem.exe
+
+    %APPVEYOR_BUILD_FOLDER%\VisualStudio\kat-check.bat
+
+    %APPVEYOR_BUILD_FOLDER%\VisualStudio\x64\%CONFIGURATION%\speed_kem.exe
+
+    %APPVEYOR_BUILD_FOLDER%\VisualStudio\x64\%CONFIGURATION%\speed_sig.exe

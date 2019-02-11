@@ -32,13 +32,18 @@ include
 *.i*86
 *.x86_64
 *.hex
-/test_kex
-/test_sig
-/test_rand
-/test_aes
-benchmark_lowmc
-pp_matrices
-precomputed_data
+tests/example_kem
+tests/example_sig
+tests/speed_kem
+tests/speed_sig
+tests/test_kem
+tests/test_sig
+tests/test_aes
+tests/test_sha3
+
+#kat
+tests/kat_kem
+kat_kem_rsp/
 
 # Debug files
 *.dSYM/
@@ -59,9 +64,9 @@ VisualStudio/**/x64/
 VisualStudio/include/
 VisualStudio/**/*.user
 
-# External sources
-external
-src/sig_picnic/external
+# Travis files
+cmake-3.8.0.tar.gz
+cmake-3.8.0/**
 
 #Autotools
 autom4te.cache
@@ -71,7 +76,7 @@ Makefile
 aclocal.m4
 compile
 config.guess
-config.h
+/config.h
 config.h.in
 config.log
 config.status
@@ -94,6 +99,14 @@ stamp-h1
 #params
 sample_params
 data/
+
+# Exceptions
+!src/sig_picnic/external/config.h.in
+src/oqsconfig.h
+
+# Misc (master branch)
+.objs_upstream
+*.geany
 
 #coverity
 analysis-results.tgz

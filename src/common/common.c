@@ -1,13 +1,15 @@
 #include <oqs/common.h>
 
+#include <stdint.h>
+#include <stdio.h>
 #include <string.h>
 
-#if defined(WINDOWS)
+#if defined(_WIN32)
 #include <windows.h>
 #endif
 
-void OQS_MEM_cleanse(void *ptr, size_t len) {
-#if defined(WINDOWS)
+OQS_API void OQS_MEM_cleanse(void *ptr, size_t len) {
+#if defined(_WIN32)
 	SecureZeroMemory(ptr, len);
 #elif defined(HAVE_MEMSET_S)
 	if (0U < len && memset_s(ptr, (rsize_t) len, 0, (rsize_t) len) != 0) {
@@ -20,9 +22,13 @@ void OQS_MEM_cleanse(void *ptr, size_t len) {
 #endif
 }
 
-void OQS_MEM_secure_free(void *ptr, size_t len) {
+OQS_API void OQS_MEM_secure_free(void *ptr, size_t len) {
 	if (ptr != NULL) {
 		OQS_MEM_cleanse(ptr, len);
-		free(ptr);
+		free(ptr); // IGNORE free-check
 	}
+}
+
+OQS_API void OQS_MEM_insecure_free(void *ptr) {
+	free(ptr); // IGNORE free-check
 }
