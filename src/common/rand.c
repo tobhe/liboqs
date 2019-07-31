@@ -68,6 +68,12 @@ void OQS_randombytes_system(uint8_t *random_array, size_t bytes_to_read) {
 		rc = getentropy(random_array, bytes_to_read);
 	} while (rc != 0);
 }
+#elif defined(__OpenBSD__)
+#include <stdlib.h>
+
+void OQS_randombytes_system(uint8_t *random_array, size_t bytes_to_read) {
+	arc4random_buf(random_array, bytes_to_read);
+}
 #else
 static __inline void delay(unsigned int count) {
 	while (count--) {
